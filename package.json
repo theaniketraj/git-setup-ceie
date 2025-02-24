@@ -1,6 +1,6 @@
 {
   "name": "git-setup-ceie",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Automates Git repo setup with Main, Controlled Environment, and Isolated Environment branches",
   "bin": {
     "git-setup-ceie": "./index.js"
