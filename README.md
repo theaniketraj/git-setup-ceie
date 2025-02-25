@@ -56,3 +56,6 @@ Contributions are welcome! Feel free to submit issues or PRs.
 ## 📜 License
 MIT License.
 
+## 📝 Note
+
+This project serves as the **foundation for CEIE**, ensuring a streamlined and structured Git setup process. However, `git-setup-ceie` will remain **independent and fully functional**, retaining all **npm commands** indefinitely.
