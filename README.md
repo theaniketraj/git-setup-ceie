@@ -1,87 +1,58 @@
-# 🚀 Git Setup CEIE
+# CEIE - Automated Git Repository Setup
 
-**Git Setup CEIE** is a CLI tool that automates the creation of a structured Git repository with three branches:
-
-1. **Main** - The primary stable branch.
-2. **Controlled Environment** - A review stage before merging changes into `main`.
-3. **Isolated Environment** - For offline work, pushed to GitHub but not directly merged into `main`.
-
-This ensures a layered approach for managing code changes, especially useful for developers who work offline frequently. 🌍
-
----
-
-## ✨ Features
-
-✅ Initializes a new Git repository automatically.  
-✅ Creates `main`, `controlled-environment`, and `isolated-environment` branches.  
-✅ Ensures `main` exists even if Git defaults to `master`.  
-✅ Skips branch creation if they already exist.  
-✅ Provides structured workflow for offline development.  
-
----
+## 🚀 Introduction
+CEIE automates Git repository initialization by setting up structured branches and linking your repository to GitHub seamlessly. This tool simplifies the process, ensuring a well-defined workflow.
 
 ## 📦 Installation
-
-Install globally using npm:
-
-```bash
+To install CEIE globally, run:
+```sh
 npm install -g git-setup-ceie
 ```
 
----
-
-## 🚀 Usage
-
-Run the following command inside a project directory:
-
-```bash
-git-setup-ceie
+Or, use it directly via `npx`:
+```sh
+npx git-setup-ceie
 ```
 
-### 📜 What Happens?
-- Initializes Git (if not already initialized).
-- Creates a `README.md` and commits it (if not already committed).
-- Creates the required branches.
-- Switches back to the `main` branch.
+## ⚡ How It Works
+This tool performs the following automated actions:
+1. Initializes a Git repository (`git init`).
+2. Checks if a remote origin exists; if not, prompts the user to enter a repository URL.
+3. Creates an initial commit with a `README.md` file.
+4. Sets up the following branches:
+   - `main`
+   - `controlled-environment`
+   - `isolated-environment`
+5. Pushes all branches to GitHub and sets up tracking.
 
----
+## 🛠 Usage
+Run the command in your project directory:
+```sh
+npx git-setup-ceie
+```
+You will be prompted to enter the repository URL if it isn't set up already.
 
-## 🛠 Example Output
-
-```bash
-$ git-setup-ceie
+## 📤 Example Output
+```sh
 🚀 Initializing Git repository...
+🔍 Checking if remote origin exists...
+✅ Remote origin already exists.
 📄 Creating an initial commit...
-✅ Creating branches...
-🔀 Switching back to main branch...
-🎉 Git repository is set up with Main, Controlled, and Isolated branches!
+✅ Initial commit created.
+✅ Creating and switching branches...
+🔀 Switching back to 'main' branch...
+📤 Pushing branches to GitHub...
+🎉 Git repository is fully set up and pushed to GitHub!
 ```
 
----
-
-## 📖 Why Use This?
-
-🔹 **Streamlined Branching Strategy** - Ensures changes go through proper review before reaching `main`.  
-🔹 **Offline-Friendly** - Work in `Isolated Environment` and sync changes later.  
-🔹 **Better Collaboration** - Use `Controlled Environment` for team review.  
-
----
+## 📌 Notes
+- If a repository is already initialized, it won’t be reinitialized.
+- If branches exist, they won’t be recreated.
+- If the remote origin exists, it won’t prompt for a URL.
 
 ## 🤝 Contributing
-
-Contributions are welcome! Feel free to open an issue or submit a pull request. 🚀
-
----
+Contributions are welcome! Feel free to submit issues or PRs.
 
 ## 📜 License
+MIT License.
 
-MIT License. See [LICENSE](LICENSE) for details.
-
----
-
-### ⭐ If you find this tool helpful, give it a star on GitHub! ⭐
-
-<<<<<<< HEAD
-=======
-
->>>>>>> 3549256 (Initial commit)
