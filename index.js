@@ -1,48 +1,66 @@
-const { exec } = require('child_process');
+#!/usr/bin/env node
 
-function createAndPushBranches() {
-  const branches = ['main', 'ce', 'ie'];
+const { execSync } = require("child_process");
 
-  branches.forEach((branch) => {
-    // Create the branch
-    exec(`git checkout -b ${branch}`, (error, stdout, stderr) => {
-      if (error) {
-        console.error(`Error creating branch ${branch}: ${error}`);
-        return;
-      }
-      if (stderr) {
-        console.error(`stderr: ${stderr}`);
-        return;
-      }
-      console.log(`Successfully created branch ${branch}`);
+try {
+  console.log("🚀 Initializing Git repository...");
+  execSync("git init", { stdio: "inherit" });
 
-      // Make an empty initial commit if the branch is new
-      exec('git commit --allow-empty -m "Initial commit"', (commitError, commitStdout, commitStderr) => {
-        if (commitError) {
-          console.error(`Error making initial commit for ${branch}: ${commitError}`);
-          return;
-        }
-        if (commitStderr) {
-          console.error(`stderr: ${commitStderr}`);
-          return;
-        }
-        console.log(`Successfully made initial commit for ${branch}`);
+  console.log("🔍 Checking if remote origin exists...");
+  let repoExists = false;
+  try {
+    execSync("git remote get-url origin", { stdio: "ignore" });
+    console.log("✅ Remote origin already exists.");
+    repoExists = true;
+  } catch {
+    console.log("🔗 Enter your repository URL:");
+    const repoUrl = require("readline-sync").question("> ");
+    execSync(`git remote add origin ${repoUrl}`, { stdio: "inherit" });
+    repoExists = true;
+  }
 
-        // Push the branch to GitHub
-        exec(`git push -u origin ${branch}`, (pushError, pushStdout, pushStderr) => {
-          if (pushError) {
-            console.error(`Error pushing branch ${branch}: ${pushError}`);
-            return;
-          }
-          if (pushStderr) {
-            console.error(`stderr: ${pushStderr}`);
-            return;
-          }
-          console.log(`Successfully pushed branch ${branch} to GitHub`);
-        });
-      });
-    });
+  console.log("📄 Creating an initial commit...");
+  execSync("echo '# Git Setup CEIE' > README.md", { stdio: "inherit" });
+  execSync("git add README.md", { stdio: "inherit" });
+  try {
+    // Use double quotes for Windows compatibility
+    execSync('git commit -m "Initial commit"', { stdio: "inherit" });
+    console.log("✅ Initial commit created.");
+  } catch {
+    console.log("⚠ Initial commit already exists, skipping...");
+  }
+
+  console.log("✅ Creating and switching branches...");
+  const branches = ["main", "controlled-environment", "isolated-environment"];
+
+  // Ensure main branch is created first
+  execSync("git checkout -B main", { stdio: "inherit" });
+  // Create the other branches
+  branches.slice(1).forEach((branch) => {
+    try {
+      execSync(`git checkout -B ${branch}`, { stdio: "inherit" });
+    } catch {
+      console.log(`⚠ Branch '${branch}' already exists, skipping...`);
+    }
   });
-}
 
-createAndPushBranches();
+  console.log("🔀 Switching back to 'main' branch...");
+  execSync("git checkout main", { stdio: "inherit" });
+
+  if (repoExists) {
+    console.log("📤 Pushing branches to GitHub...");
+    branches.forEach((branch) => {
+      try {
+        execSync(`git push -u origin ${branch}`, { stdio: "inherit" });
+      } catch {
+        console.log(`⚠ Failed to push '${branch}' branch. Make sure the repository is accessible.`);
+      }
+    });
+  } else {
+    console.log("⚠ Skipping push to GitHub because no remote repository was added.");
+  }
+
+  console.log("🎉 Git repository is fully set up and pushed to GitHub!");
+} catch (error) {
+  console.error("❌ Error setting up Git:", error.message);
+}
