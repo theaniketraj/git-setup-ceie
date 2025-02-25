@@ -1,76 +1,48 @@
-#!/usr/bin/env node
+const { exec } = require('child_process');
 
-const { execSync } = require("child_process");
-const fs = require("fs");
+function createAndPushBranches() {
+  const branches = ['main', 'ce', 'ie'];
 
-try {
-  console.log("🚀 Initializing Git repository...");
-  execSync("git init", { stdio: "inherit" });
+  branches.forEach((branch) => {
+    // Create the branch
+    exec(`git checkout -b ${branch}`, (error, stdout, stderr) => {
+      if (error) {
+        console.error(`Error creating branch ${branch}: ${error}`);
+        return;
+      }
+      if (stderr) {
+        console.error(`stderr: ${stderr}`);
+        return;
+      }
+      console.log(`Successfully created branch ${branch}`);
 
-  console.log("📄 Creating README.md...");
-  if (!fs.existsSync("README.md")) {
-    fs.writeFileSync("README.md", "# Git Setup CEIE\n");
-    console.log("✅ README.md created!");
-  } else {
-    console.log("⚠ README.md already exists, skipping...");
-  }
+      // Make an empty initial commit if the branch is new
+      exec('git commit --allow-empty -m "Initial commit"', (commitError, commitStdout, commitStderr) => {
+        if (commitError) {
+          console.error(`Error making initial commit for ${branch}: ${commitError}`);
+          return;
+        }
+        if (commitStderr) {
+          console.error(`stderr: ${commitStderr}`);
+          return;
+        }
+        console.log(`Successfully made initial commit for ${branch}`);
 
-  console.log("📄 Creating an initial commit...");
-  execSync("git add README.md", { stdio: "inherit" });
-  try {
-    // Use double quotes for the commit message to avoid shell quoting issues
-    execSync('git commit -m "Initial commit"', { stdio: "inherit" });
-  } catch (error) {
-    console.log("⚠ Initial commit may already exist, skipping commit...");
-  }
-
-  // Ensure that HEAD is a valid commit; if not, force an empty commit
-  try {
-    execSync("git rev-parse --verify HEAD", { stdio: "ignore" });
-  } catch {
-    console.log("📌 No commit found on current branch, creating an empty commit...");
-    execSync('git commit --allow-empty -m "Empty initial commit"', { stdio: "inherit" });
-  }
-
-  console.log("✅ Checking for existing branches...");
-  const branchExists = (branch) => {
-    try {
-      execSync(`git show-ref --verify --quiet refs/heads/${branch}`);
-      return true;
-    } catch {
-      return false;
-    }
-  };
-
-  console.log("🔀 Switching to 'main' branch...");
-  if (!branchExists("main")) {
-    console.log("🆕 Creating and switching to 'main' branch...");
-    execSync("git checkout -b main", { stdio: "inherit" });
-  } else {
-    console.log("🔄 'main' branch exists, switching to it...");
-    execSync("git checkout main", { stdio: "inherit" });
-  }
-
-  // Create 'controlled-environment' branch if it doesn't exist
-  if (!branchExists("controlled-environment")) {
-    console.log("🆕 Creating 'controlled-environment' branch...");
-    execSync("git branch controlled-environment", { stdio: "inherit" });
-  } else {
-    console.log("⚠ Branch 'controlled-environment' already exists, skipping...");
-  }
-
-  // Create 'isolated-environment' branch if it doesn't exist
-  if (!branchExists("isolated-environment")) {
-    console.log("🆕 Creating 'isolated-environment' branch...");
-    execSync("git branch isolated-environment", { stdio: "inherit" });
-  } else {
-    console.log("⚠ Branch 'isolated-environment' already exists, skipping...");
-  }
-
-  console.log("🔀 Switching back to 'main' branch...");
-  execSync("git checkout main", { stdio: "inherit" });
-
-  console.log("🎉 Git repository is set up with 'main', 'controlled-environment', and 'isolated-environment' branches!");
-} catch (error) {
-  console.error("❌ Error setting up Git repository:", error.message);
+        // Push the branch to GitHub
+        exec(`git push -u origin ${branch}`, (pushError, pushStdout, pushStderr) => {
+          if (pushError) {
+            console.error(`Error pushing branch ${branch}: ${pushError}`);
+            return;
+          }
+          if (pushStderr) {
+            console.error(`stderr: ${pushStderr}`);
+            return;
+          }
+          console.log(`Successfully pushed branch ${branch} to GitHub`);
+        });
+      });
+    });
+  });
 }
+
+createAndPushBranches();
