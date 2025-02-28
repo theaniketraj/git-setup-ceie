@@ -72,5 +72,3 @@ MIT License.
 ## 📝 Note
 
 This project serves as the **foundation for [CEIE](https://github.com/theaniketraj/ceie)**, ensuring a streamlined and structured Git setup process. However, `git-setup-ceie` will remain **independent and fully functional**, retaining all **npm commands** indefinitely.
-
-=======
