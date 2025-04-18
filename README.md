@@ -78,7 +78,7 @@ Contributions are welcome! Feel free to submit issues or PRs.
 
 ## **📜 License**
 
-MIT License.
+[MIT License](https://github.com/theaniketraj/git-setup-ceie?tab=MIT-1-ov-file)
 
 ## **📝 Note**
 
