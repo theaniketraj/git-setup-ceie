@@ -3,12 +3,20 @@
   "version": "2.0.5",
   "description": "Automates Git repo setup with Main, Controlled Environment, and Isolated Environment branches",
   "bin": {
-    "git-setup-ceie": "./index.js"
+    "git-setup-ceie": "index.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/theaniketraj/git-setup-ceie.git"
   },
+  "keywords": [
+    "git",
+    "automation",
+    "repository",
+    "ci-cd",
+    "setup",
+    "ceie"
+  ],
   "author": "Aniket Raj",
   "license": "MIT",
   "dependencies": {
