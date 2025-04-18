@@ -4,7 +4,18 @@
 
 CEIE automates Git repository initialization by setting up structured branches and linking your repository to GitHub seamlessly. This tool simplifies the process, ensuring a well-defined workflow.
 
-## 📦 Installation
+## **Table of Contents**
+
+1. [Installation](#-installation)
+2. [How It Works](#-how-it-works)
+3. [Usage](#-usage)
+4. [Example Output](#-example-output)
+5. [Notes](#-notes)
+6. [Contributing](#-contributing)
+7. [License](#-license)
+8. [Note](#-note)
+
+## **📦 Installation**
 
 To install CEIE globally, run:
 
@@ -18,7 +29,7 @@ Or, use it directly via `npx`:
 npx git-setup-ceie
 ```
 
-## ⚡ How It Works
+## **⚡ How It Works**
 
 This tool performs the following automated actions:
 
@@ -31,7 +42,7 @@ This tool performs the following automated actions:
    - `isolated-environment`
 5. Pushes all branches to GitHub and sets up tracking.
 
-## 🛠 Usage
+## **🛠 Usage**
 
 Run the command in your project directory:
 
@@ -41,7 +52,7 @@ npx git-setup-ceie
 
 You will be prompted to enter the repository URL if it isn't set up already.
 
-## 📤 Example Output
+## **📤 Example Output**
 
 ```sh
 🚀 Initializing Git repository...
@@ -55,20 +66,20 @@ You will be prompted to enter the repository URL if it isn't set up already.
 🎉 Git repository is fully set up and pushed to GitHub!
 ```
 
-## 📌 Notes
+## **📌 Notes**
 
 - If a repository is already initialized, it won’t be reinitialized.
 - If branches exist, they won’t be recreated.
 - If the remote origin exists, it won’t prompt for a URL.
 
-## 🤝 Contributing
+## **🤝 Contributing**
 
 Contributions are welcome! Feel free to submit issues or PRs.
 
-## 📜 License
+## **📜 License**
 
 MIT License.
 
-## 📝 Note
+## **📝 Note**
 
 This project serves as the **foundation for [CEIE](https://github.com/theaniketraj/ceie)**, ensuring a streamlined and structured Git setup process. However, `git-setup-ceie` will remain **independent and fully functional**, retaining all **npm commands** indefinitely.
