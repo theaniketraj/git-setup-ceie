@@ -1,13 +1,9 @@
 {
   "name": "git-setup-ceie",
   "version": "2.0.6",
-  "description": "Automates Git repo setup with Main, Controlled Environment, and Isolated Environment branches",
+  "main": "index.js",
   "bin": {
-    "git-setup-ceie": "index.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/theaniketraj/git-setup-ceie.git"
+    "git-setup-ceie": "./index.js"
   },
   "keywords": [
     "git",
@@ -19,6 +15,15 @@
   ],
   "author": "Aniket Raj",
   "license": "MIT",
+  "description": "Automates Git repo setup with Main, Controlled Environment, and Isolated Environment branches",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/theaniketraj/git-setup-ceie"
+  },
+  "bugs": {
+    "url": "https://github.com/theaniketraj/git-setup-ceie/issues"
+  },
+  "homepage": "https://github.com/theaniketraj/git-setup-ceie#readme",
   "dependencies": {
     "readline-sync": "^1.4.10"
   }
