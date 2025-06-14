@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description"
+        content="A minimalist daily log for my personal thoughts and reflections. Will capture what matters most in my journey.">
+    <meta name="keywords" content="daily log, personal journal, thoughts, reflections, minimalist, self-improvement">
+    <meta name="author" content="Aniket Raj">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Log</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="component" href="components.html" />
+
+</head>
+
+<body data-theme="dark">
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <h1 class="logo">Daily Log</h1>
+                <button class="theme-toggle" onclick="toggleTheme()">
+                    <span id="theme-text">☀️ Light</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Home Section -->
+        <section class="home-section" id="home">
+            <div class="intro-card">
+                <h1>Welcome</h1>
+                <p>A minimalist space for daily thoughts and reflections. To capture what matters most in my journey.
+                </p>
+                <button class="enter-btn" onclick="showLogs()">Enter</button>
+            </div>
+
+            <div class="social-container">
+                <div class="social-trigger">
+                    <span>🔗</span>
+                    <span>Connect</span>
+                </div>
+                <div class="social-links">
+                    <a href="https://dev.to/theaniketraj" class="social-link" target="_blank">
+                        <span>💻</span>
+                        <span>Dev.to</span>
+                    </a>
+                    <a href="https://github.com/theaniketraj" class="social-link" target="_blank">
+                        <span>⚡</span>
+                        <span>GitHub</span>
+                    </a>
+                    <a href="https://linkedin.com/in/theaniketraj" class="social-link" target="_blank">
+                        <span>💼</span>
+                        <span>LinkedIn</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Logs Section -->
+        <section class="logs-section" id="logs">
+            <div class="search-section">
+                <div class="search-container">
+                    <input type="text" class="search-input" placeholder="Search for thoughts and memories..."
+                        id="searchInput" oninput="searchLogs()">
+                </div>
+            </div>
+
+            <div class="calendar-view" id="calendarView">
+                <div class="calendar-header">
+                    <button id="prevMonth">←</button>
+                    <h3 id="currentMonth"></h3>
+                    <button id="nextMonth">→</button>
+                </div>
+                <div class="calendar-grid" id="calendarGrid"></div>
+            </div>
+
+            <div class="stats-container" id="statsView">
+                <div class="stat-card">
+                    <h4>Writing Streak</h4>
+                    <p id="currentStreak">0 days</p>
+                </div>
+                <div class="stat-card">
+                    <h4>Total Entries</h4>
+                    <p id="totalEntries">0</p>
+                </div>
+                <div class="stat-card">
+                    <h4>Most Active Day</h4>
+                    <p id="activeDay">-</p>
+                </div>
+            </div>
+
+            <div class="logs-container" id="logsContainer">
+                <!-- Logs will be populated here -->
+            </div>
+
+            <div class="tags-container">
+                <h3>Filter by Tags</h3>
+                <div class="tags-list" id="tagsList"></div>
+            </div>
+        </section>
+    </div>
+
+
+
+    <footer class="footer">
+        <p>© 2025 Aniket Raj. All rights reserved.</p>
+        <p>Inspired by the beauty of simplicity and the power of reflection.</p>
+        <script src="script.js"></script>
+</body>
+
+</html>
